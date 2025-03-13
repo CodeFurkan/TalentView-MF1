@@ -18,4 +18,10 @@ class TalentViewElement extends HTMLElement {
 }
 
 // Registriere die Web Component
-customElements.define("talent-view", TalentViewElement);
+if (customElements.get("talent-view")) {
+	console.warn(
+		"'talent-view' ist bereits registriert. Registrierung wird übersprungen.",
+	);
+} else {
+	customElements.define("talent-view", TalentViewElement);
+}
