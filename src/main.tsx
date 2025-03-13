@@ -1,27 +1,30 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import TalentView from "./TalentView.tsx";
+import LuigiClient from "@luigi-project/client";
 
-class TalentViewElement extends HTMLElement {
+export class TalentViewElement extends HTMLElement {
+	constructor() {
+		super();
+		this.attachShadow({ mode: "open" });
+
+		LuigiClient.uxManager().showAlert({
+			text: "TalentView wurde geladen!",
+			type: "info",
+		});
+	}
+
 	connectedCallback() {
-		if (!this.shadowRoot) {
-			const mountPoint = document.createElement("div");
-			this.appendChild(mountPoint);
-			const root = ReactDOM.createRoot(mountPoint);
-			root.render(
-				<React.StrictMode>
-					<TalentView />
-				</React.StrictMode>,
-			);
-		}
+		if (!this.shadowRoot) return;
+		const mountPoint = document.createElement("div");
+		this.shadowRoot.appendChild(mountPoint);
+		const root = ReactDOM.createRoot(mountPoint);
+		root.render(
+			<React.StrictMode>
+				<TalentView />
+			</React.StrictMode>,
+		);
 	}
 }
-
 // Registriere die Web Component
-if (customElements.get("talent-view")) {
-	console.warn(
-		"'talent-view' ist bereits registriert. Registrierung wird übersprungen.",
-	);
-} else {
-	customElements.define("talent-view", TalentViewElement);
-}
+// customElements.define("talent-view", TalentViewElement);
