@@ -7,15 +7,18 @@ export default defineConfig({
 		"import.meta.env": {},
 		"process.env": {},
 	},
-
-	// build: {
-	// 	target: "esnext",
-	// 	lib: {
-	// 		entry: "src/main.tsx",
-	// 		formats: ["es"],
-	// 		fileName: () => "talent-view.js",
-	// 	},
-	// },
+	build: {
+		target: "esnext",
+		lib: {
+			entry: "src/main.tsx",
+			formats: ["es"],
+		},
+		rollupOptions: {
+			output: {
+				entryFileNames: "talent-view.js",
+			},
+		},
+	},
 	server: {
 		port: 3001,
 		hmr: {
